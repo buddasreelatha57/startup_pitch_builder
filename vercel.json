@@ -1,6 +1,6 @@
 {
   "framework": "vite",
-  "installCommand": "npm ci --prefix frontend",
-  "buildCommand": "npm run build --prefix frontend",
+  "installCommand": "npm install --include=dev",
+  "buildCommand": "npm run build --workspaces",
   "outputDirectory": "frontend/dist"
 }
