@@ -3,10 +3,8 @@
   "installCommand": "npm install --include=dev",
   "buildCommand": "npm run build --workspaces",
   "outputDirectory": "frontend/dist",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
