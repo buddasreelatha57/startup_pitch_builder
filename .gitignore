@@ -1,0 +1,13 @@
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local persisted user data
+backend/data/users.json
