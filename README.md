@@ -35,6 +35,10 @@ docker run --env-file backend/.env -p 4000:4000 startup-pitch-builder
 
 Open `http://localhost:4000`. The container builds and serves the frontend and API together.
 
+## Deploy frontend to Vercel
+
+Import `buddasreelatha57/startup_pitch_builder` and deploy the `main` branch. The root `vercel.json` builds only `frontend` and publishes `frontend/dist`. Set `VITE_API_URL` in Vercel to the deployed backend URL ending in `/api`; do not use `localhost` in production. Deploy the backend separately with its MongoDB and Google Cloud environment variables.
+
 ## Google Cloud setup
 
 Set the values in `.env` and authenticate the backend with Application Default Credentials (`gcloud auth application-default login`) or a service account. With `GOOGLE_GENAI_USE_ENTERPRISE=true`, Gemini uses Vertex AI in the configured project and location. Reference PDFs are uploaded to `gs://{GCS_BUCKET}/users/{userId}/projects/{projectId}/references/`.
