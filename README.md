@@ -36,4 +36,4 @@ Vertex Vector Search also requires `VERTEX_DEPLOYED_INDEX_ID`; the supplied `VER
 
 ## Next production integrations
 
-Replace the in-memory repository with Firestore, use GCS in the upload service, run PDF extraction/indexing through Cloud Tasks or Pub/Sub, and supply Vertex retrieval + Gemini JSON generation implementations. Keep the existing slide validation and source/assumption policies intact.
+MongoDB now stores users and project history. Set `MONGODB_URI` and `MONGODB_DB` in `backend/.env`; passwords are hashed with bcrypt and project pitch edits persist across restarts. Keep the MongoDB URI out of Git and rotate the database password if it has been shared outside your trusted environment.
