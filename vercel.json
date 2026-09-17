@@ -2,5 +2,11 @@
   "framework": "vite",
   "installCommand": "npm install --include=dev",
   "buildCommand": "npm run build --workspaces",
-  "outputDirectory": "frontend/dist"
+  "outputDirectory": "frontend/dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
