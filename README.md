@@ -24,6 +24,17 @@ The local development adapter never presents unprovided revenue, customers, mark
 
 Register an account, create a project (try **FarmConnect AI**, AgriTech, India), upload PDF reference decks, and generate the ten-slide pitch.
 
+## Run with Docker
+
+Copy the environment template to `backend/.env`, add your MongoDB and Google Cloud credentials, then build and run the container:
+
+```powershell
+docker build -t startup-pitch-builder .
+docker run --env-file backend/.env -p 4000:4000 startup-pitch-builder
+```
+
+Open `http://localhost:4000`. The container builds and serves the frontend and API together.
+
 ## Google Cloud setup
 
 Set the values in `.env` and authenticate the backend with Application Default Credentials (`gcloud auth application-default login`) or a service account. With `GOOGLE_GENAI_USE_ENTERPRISE=true`, Gemini uses Vertex AI in the configured project and location. Reference PDFs are uploaded to `gs://{GCS_BUCKET}/users/{userId}/projects/{projectId}/references/`.

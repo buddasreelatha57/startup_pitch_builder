@@ -27,7 +27,7 @@ import jsPDF from "jspdf";
 import pptxgen from "pptxgenjs";
 import "./App.css";
 import "./Auth.css";
-const api = "http://localhost:4000/api";
+const api = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
 const steps = [
   "Startup Details",
   "Reference Decks",

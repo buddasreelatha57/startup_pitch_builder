@@ -7,6 +7,9 @@ import {z} from 'zod';
 import {generatePitch} from './services/pitch.js';
 import {cloudStatus,searchVertex,uploadReference} from './services/google-cloud.js';
 import {checkPassword,connectMongo,hashPassword,projects,users} from './services/mongo.js';
+import {existsSync} from 'node:fs';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
 
 const app=express();
 const upload=multer({limits:{fileSize:25*1024*1024},fileFilter:(_r,f,cb)=>cb(null,f.mimetype==='application/pdf')});
@@ -95,7 +98,11 @@ app.post('/api/projects/:id/slides/:slideId/improve',auth,async(req:any,res)=>{
 });
 
 app.get('/health',(_q,res)=>res.json({ok:true,mode:cloudStatus.project?'gcp-configured':'local-demo',cloud:cloudStatus,mongo:Boolean(process.env.MONGODB_URI)}));
-app.use((_q,res)=>res.status(404).json({error:'Route not found'}));
+const frontendDist=process.env.FRONTEND_DIST||join(fileURLToPath(new URL('.',import.meta.url)),'../../frontend/dist');
+if(existsSync(frontendDist)){
+ app.use(express.static(frontendDist));
+ app.use((_q,res)=>res.sendFile(join(frontendDist,'index.html')));
+}else app.use((_q,res)=>res.status(404).json({error:'Route not found'}));
 app.use((e:any,_q:any,res:any,_n:any)=>res.status(400).json({error:e.message||'Request failed'}));
 
 async function start(){await connectMongo();app.listen(process.env.PORT||4000,()=>console.log('API listening'))}
